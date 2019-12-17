@@ -1,0 +1,9 @@
+<lcgdict>
+  <selection>
+    <class name="bdm::experimental::neuroscience::NeuronOrNeurite" />
+    <class name="bdm::experimental::neuroscience::NeuronSoma" />
+    <class name="bdm::experimental::neuroscience::NeuriteElement" />
+    <class name="bdm::SimObject" />
+    <class name="bdm::Cell" />
+  </selection>
+</lcgdict>
