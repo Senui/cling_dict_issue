@@ -1,18 +1,23 @@
-#include "classes.h"
+#include "src/neurite_element.h"
+
+#include <iostream>
 
 R__LOAD_LIBRARY(libmain)
 
 using namespace bdm;
-using namespace bdm::experimental::neuroscience;
 
 void test() {
-  auto* soma = new NeuronSoma();
-  NeuriteElement neurite(42);
+  NeuriteElement my_neurite;
+  SimObject *so = &my_neurite;
 
-  SimObject* so = neurite.GetInstance(soma);
-  soma->EventHandler(so);
-  std::cout << "Macro: so->GetUid() = " << so->GetUid() << std::endl;
+  std::cout << "[Before lib call] so = " << so << std::endl;
+  std::cout << "[Before lib call] so->GetUid() = " << so->GetUid() << std::endl;
 
-  auto *neurite2 = dynamic_cast<NeuriteElement *>(so);
-  std::cout << "Macro: neurite2->GetUid() = " << neurite2->GetUid() << std::endl;
+  my_neurite.EventHandler(so); // crashes later on dynamic cast
+
+  std::cout << "[After lib call] so = " << so << std::endl;
+  std::cout << "[After lib call] so->GetUid() = " << so->GetUid() << std::endl;
+
+  auto *casted = dynamic_cast<NeuriteElement *>(so);
+  std::cout << casted->GetUid() << std::endl;
 }
