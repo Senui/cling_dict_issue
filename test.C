@@ -1,23 +1,15 @@
-#include "src/neurite_element.h"
-
+#include "src/reproducer.h"
 #include <iostream>
 
-R__LOAD_LIBRARY(libmain)
-
-using namespace bdm;
+R__LOAD_LIBRARY(libreproducer)
 
 void test() {
-  NeuriteElement my_neurite;
-  SimObject *so = &my_neurite;
+  D d;
+  B1 *b = &d;
+  std::cout << b->GetUid() << std::endl;
 
-  std::cout << "[Before lib call] so = " << so << std::endl;
-  std::cout << "[Before lib call] so->GetUid() = " << so->GetUid() << std::endl;
+  d.Foo(b);
 
-  my_neurite.EventHandler(so); // crashes later on dynamic cast
-
-  std::cout << "[After lib call] so = " << so << std::endl;
-  std::cout << "[After lib call] so->GetUid() = " << so->GetUid() << std::endl;
-
-  auto *casted = dynamic_cast<NeuriteElement *>(so);
+  auto *casted = dynamic_cast<D *>(b);
   std::cout << casted->GetUid() << std::endl;
 }

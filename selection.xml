@@ -1,8 +1,7 @@
 <lcgdict>
   <selection>
-    <class name="bdm::NeuronOrNeurite" />
-    <class name="bdm::NeuriteElement" />
-    <class name="bdm::SimObject" />
-    <class name="bdm::Cell" />
+    <class name="B1" />
+    <class name="B2" />
+    <class name="D" />
   </selection>
 </lcgdict>

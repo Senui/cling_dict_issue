@@ -22,8 +22,6 @@
 
 #define BDM_CLASS_DEF(class_name, class_version_id) \
   ClassDef(class_name, class_version_id)
-#define BDM_CLASS_DEF_NV(class_name, class_version_id) \
-  ClassDefNV(class_name, class_version_id)
 #define BDM_CLASS_DEF_OVERRIDE(class_name, class_version_id) \
   ClassDefOverride(class_name, class_version_id)
 
@@ -56,11 +54,9 @@
  private:
 // NOLINT
 
-// -----------------------------------------------------------------------------
-// -----------------------------------------------------------------------------
 #else
 
-// #include "core/util/log.h"
+#include <iostream>
 
 #define BDM_DICT_ERROR_MSG                            \
   "You tried to use a ROOT dictionary function, but " \
@@ -92,6 +88,7 @@
   virtual void ShowMembers(TMemberInspector& insp) const {      \
   }                                                             \
   virtual void Streamer(TBuffer&) {                             \
+    std::cout << BDM_DICT_ERROR_MSG << std::endl;               \
   }                                                             \
   void StreamerNVirtual(TBuffer& ClassDef_StreamerNVirtual_b) { \
   }                                                             \
@@ -108,42 +105,6 @@
     return __LINE__;                                            \
   }                                                             \
                                                                 \
- private:
-// NOLINT
-
-#define BDM_NULL_CLASS_DEF_NV(class_name, class_version_id)                 \
- public:                                                                    \
-  static TClass* Class() {                                                  \
-    return nullptr;                                                         \
-  }                                                                         \
-  static const char* Class_Name() {                                         \
-    return nullptr;                                                         \
-  }                                                                         \
-  static Version_t Class_Version() {                                        \
-    return class_version_id;                                                \
-  }                                                                         \
-  static TClass* Dictionary() {                                             \
-    return nullptr;                                                         \
-  }                                                                         \
-  TClass* IsA() const { return class_name::Class(); }                       \
-  void ShowMembers(TMemberInspector& insp) const {                          \
-  }                                                                         \
-  void Streamer(TBuffer&) { Log::Fatal("Dictionary", BDM_DICT_ERROR_MSG); } \
-  void StreamerNVirtual(TBuffer& ClassDef_StreamerNVirtual_b) {             \
-  }                                                                         \
-  static const char* DeclFileName() {                                       \
-    return nullptr;                                                         \
-  }                                                                         \
-  static int ImplFileLine() {                                               \
-    return -1;                                                              \
-  }                                                                         \
-  static const char* ImplFileName() {                                       \
-    return nullptr;                                                         \
-  }                                                                         \
-  static int DeclFileLine() {                                               \
-    return __LINE__;                                                        \
-  }                                                                         \
-                                                                            \
  private:
 // NOLINT
 
@@ -167,6 +128,7 @@
   void ShowMembers(TMemberInspector& insp) const override {       \
   }                                                               \
   void Streamer(TBuffer&) override {                              \
+    std::cout << BDM_DICT_ERROR_MSG << std::endl;               \
   }                                                               \
   void StreamerNVirtual(TBuffer& ClassDef_StreamerNVirtual_b) {   \
   }                                                               \
@@ -189,12 +151,8 @@
 /// Forward all calls to BDM_NULL_CLASS_DEF
 #define BDM_CLASS_DEF(class_name, class_version_id) \
   BDM_NULL_CLASS_DEF(class_name, class_version_id)
-#define BDM_CLASS_DEF_NV(class_name, class_version_id) \
-  BDM_NULL_CLASS_DEF_NV(class_name, class_version_id)
 #define BDM_CLASS_DEF_OVERRIDE(class_name, class_version_id) \
   BDM_NULL_CLASS_DEF_OVERRIDE(class_name, class_version_id)
-#define BDM_TEMPLATE_CLASS_DEF(class_name, class_version_id) \
-  BDM_NULL_CLASS_DEF(class_name, class_version_id)
 
 #endif  // defined(USE_DICT)
 
