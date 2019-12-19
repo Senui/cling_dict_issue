@@ -4,10 +4,12 @@ This example reproduces the problem described in: https://root-forum.cern.ch/t/p
 
 
 ### Expected outcome
+```
 Processing test.C...
 123
 123
 123
+```
 
 ### To reproduce segfault
 
